@@ -1,0 +1,11 @@
+{
+  "name": "songlocator-deezer",
+  "version": "0.1.0",
+  "description": "SongLocator resolver for Deezer",
+  "tags": ["songlocator", "api", "music", "streaming", "audio", "resolver", "deezer"],
+  "author": "Andrey Popp <8mayday@gmail.com>",
+  "main": ["./songlocator-deezer.js"],
+  "dependencies": {
+    "songlocator-base": "~0.1.1"
+  }
+}
