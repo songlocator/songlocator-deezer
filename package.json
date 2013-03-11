@@ -1,6 +1,6 @@
 {
   "name": "songlocator-deezer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SongLocator resovler for Deezer",
   "main": "songlocator-deezer.js",
   "dependencies": {
