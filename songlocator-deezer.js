@@ -24,8 +24,22 @@ var __hasProp = {}.hasOwnProperty,
     return root.SongLocator.Deezer = factory(SongLocator);
   }
 })(this, function(_arg) {
-  var BaseResolver, Resolver, extend;
+  var BaseResolver, Resolver, artistRoleRe, cleanArtist, extend;
   BaseResolver = _arg.BaseResolver, extend = _arg.extend;
+  artistRoleRe = /\[[^\]]+\]/g;
+  cleanArtist = function(artist) {
+    var cleaned;
+    if (artist != null) {
+      cleaned = artist.replace(artistRoleRe, '', 'g').trim();
+      if (cleaned) {
+        return cleaned;
+      } else {
+        return artist;
+      }
+    } else {
+      return artist;
+    }
+  };
   Resolver = (function(_super) {
 
     __extends(Resolver, _super);
@@ -54,19 +68,20 @@ var __hasProp = {}.hasOwnProperty,
             return;
           }
           results = (function() {
-            var _i, _len, _ref, _ref1, _ref2, _ref3, _results;
+            var _i, _len, _ref, _ref1, _ref2, _ref3, _ref4, _results;
             _ref = response.data;
             _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               item = _ref[_i];
               _results.push({
                 title: item.title,
-                artist: (_ref1 = item.artist) != null ? _ref1.name : void 0,
-                album: (_ref2 = item.album) != null ? _ref2.title : void 0,
+                artist: cleanArtist((_ref1 = item.artist) != null ? _ref1.name : void 0),
+                dartist: (_ref2 = item.artist) != null ? _ref2.name : void 0,
+                album: (_ref3 = item.album) != null ? _ref3.title : void 0,
                 source: this.name,
                 id: item.id,
                 linkURL: item.link,
-                imageURL: "" + ((_ref3 = item.album) != null ? _ref3.cover : void 0) + "?size=big",
+                imageURL: "" + ((_ref4 = item.album) != null ? _ref4.cover : void 0) + "?size=big",
                 audioURL: void 0,
                 audioPreviewURL: item.preview,
                 mimetype: 'audio/mpeg',

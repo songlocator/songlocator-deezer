@@ -19,6 +19,15 @@
 
 ) this, ({BaseResolver, extend}) ->
 
+  artistRoleRe = /\[[^\]]+\]/g
+
+  cleanArtist = (artist) ->
+    if artist?
+      cleaned = artist.replace(artistRoleRe, '', 'g').trim()
+      if cleaned then cleaned else artist
+    else
+      artist
+
   class Resolver extends BaseResolver
     name: 'deezer'
     score: 0.9
@@ -34,7 +43,7 @@
           results = for item in response.data
             {
               title: item.title
-              artist: item.artist?.name
+              artist: cleanArtist(item.artist?.name)
               album: item.album?.title
 
               source: this.name
